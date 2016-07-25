@@ -83,6 +83,7 @@ ProjectGenerator.prototype.project = function project() {
   ];
 
   this.npmInstall(deps, {
+    saveDev: true,
     skipMessage: true,
     callback: done,
   });
