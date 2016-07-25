@@ -37,6 +37,7 @@ ProjectGenerator.prototype.project = function project() {
   this.copy('_.eslintrc', '.eslintrc');
   this.copy('_.gitignore', '.gitignore');
   this.copy('_.gitignore-public', 'public/dist/.gitignore');
+  this.copy('resources/views/master.njk', 'resources/views/master.njk');
 
   copyDir.forEach(function(file) {
     _this.bulkDirectory(file, file);
