@@ -6,60 +6,43 @@ It also will also install [Yoga Sass](http://rtablada.github.io/yoga-sass), [Fon
 ## Installing the Generator
 
 ```bash
-npm install -g broccoli-cli yo generator-adonis-broccoli
+npm install -g yo generator-adonis-broccoli ember-cli
 ```
 
 ## Creating Projects
 
-To create a project with this generator run:
+To add asset compiliation to your project:
 
 ```bash
 yo adonis-broccoli
 ```
 
-This will ask you for your project name, and a few details to get up and started.
+The script will ask to overwrite your `master.njk` view and your `.gitignore`.
+On a new project, you should make these changes for quick and easy setup.
 
-## Running the Development Server
+On existing projects:
 
-Once the project has been created, move into the directory and then run:
+Add `/tmp` to your project's `.gitignore` file to ignore the cache folder that broccoli uses.
 
-```bash
-npm run serve
+Change your CSS to point to `/dist/app.css` to use the CSS created by SASS.
+
+## Adding NPM Scripts
+
+To your `package.json` file add the following `scripts`:
+
+* `"assets:build": "ember build -o public/dist"`
+* `"assets:watch": "ember build -w -o public/dist"`
+
+## Building Assets
+
+Now that you have your project setup, to watch your assets in development mode run:
+
+```
+npm run assets:watch
 ```
 
-The `Brocfile.js` injects live reload into HTML files in the `public` directory.
-This command is backed by `ember-cli` which will fire a reload whenever Broccoli rebuilds any trees.
+In CI and Production, the assets can be built once without watching files:
 
-## Building the Project
-
-To build the project into a final production build, run:
-
-```bash
-npm run build
 ```
-
-This will build the project into a `dist` directory that can be uploaded to services such as Firebase, Surge, or AWS.
-
-## Lining SASS
-
-This project comes with [SASS Lint](https://github.com/sasstools/sass-lint) support.
-
-To run SASS lint, run the command:
-
-```bash
-npm run lint
+npm run assets:build
 ```
-
-The rules installed beyond the [SASS Lint](https://github.com/sasstools/sass-lint/blob/master/lib/config/sass-lint.yml) defaults:
-
-* Class Name Format: BEM
-* No IDs
-* No Important
-* Hex Notation: Lowercase
-* Indentation: 2 Spaces
-* Property Sort Order: SMACSS
-  - Box
-  - Border
-  - Background
-  - Text
-  - Other
