@@ -5,47 +5,22 @@ const Autoprefixer = require('broccoli-autoprefixer');
 const CssOptimizer = require('broccoli-csso');
 const Funnel = require('broccoli-funnel');
 const Babel = require('broccoli-babel-transpiler');
-const Concat = require('broccoli-sourcemap-concat');
-const rename = require('broccoli-stew').rename;
+const mv = require('broccoli-stew').mv;
+const rm = require('broccoli-stew').rm;
+const browserify = require('broccoli-browserify-cache');
 
 const stylePaths = [
   'resources/styles',
-  'node_modules/normalize-css',
-  'node_modules/font-awesome/scss',
-  'node_modules/yoga-sass/assets',
+  'node_modules',
 ];
 
-const vendorFileNames = [
-  'fetch.js',
-  'loader.js',
-];
+const appNoSass = rm('resources/javascript', '**/*.scss');
 
-const vendorFolder = new Merge([
-  'node_modules/whatwg-fetch/',
-  'node_modules/loader.js/lib/loader/',
-], {overwrite: true});
+const babelScript = new Babel(appNoSass);
 
-const vendorFiles = new Funnel(vendorFolder, {
-  files: vendorFileNames,
-});
-
-const vendor = Concat(vendorFiles, {
-  inputFiles: vendorFileNames,
-  outputFile: '/vendor.js',
-});
-
-const babelScript = Babel('resources/javascript', {
-  browserPolyfill: true,
-  stage: 0,
-  moduleIds: true,
-  modules: 'amd',
-});
-
-const appScript = Concat(babelScript, {
-  inputFiles: [
-    '**/*.js',
-  ],
-  outputFile: '/app.js',
+const appScript = browserify(babelScript, {
+  entries: ['./index'],
+  outputFile: 'app.js',
 });
 
 const compiledSass = new Sass(stylePaths, 'app.scss', 'app.css', {});

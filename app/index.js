@@ -36,6 +36,7 @@ ProjectGenerator.prototype.project = function project() {
   this.copy('Brocfile.js', 'Brocfile.js');
   this.copy('_.eslintrc', '.eslintrc');
   this.copy('_.gitignore', '.gitignore');
+  this.copy('_.babelrc', '.babelrc');
   this.copy('_.gitignore-public', 'public/.gitignore');
   this.copy('resources/views/master.njk', 'resources/views/master.njk');
 
@@ -60,13 +61,14 @@ ProjectGenerator.prototype.project = function project() {
   }, this);
 
   var deps = [
+    'babel-preset-es2015',
     'font-awesome',
     'normalize-css',
     'whatwg-fetch',
     'yoga-sass',
     'broccoli',
     'broccoli-autoprefixer',
-    'broccoli-babel-transpiler',
+    'broccoli-babel-transpiler@6.0.0-alpha.1',
     'broccoli-csso',
     'broccoli-cli',
     'broccoli-funnel',
