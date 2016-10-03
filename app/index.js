@@ -71,6 +71,7 @@ ProjectGenerator.prototype.project = function project() {
     'broccoli-babel-transpiler@6.0.0-alpha.1',
     'broccoli-csso',
     'broccoli-cli',
+    'broccoli-browserify-cache',
     'broccoli-funnel',
     'broccoli-inject-livereload',
     'broccoli-merge-trees',
