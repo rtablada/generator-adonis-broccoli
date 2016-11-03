@@ -34,7 +34,7 @@ ProjectGenerator.prototype.project = function project() {
 
   this.template('_.sass-lint.yml', '.sass-lint.yml');
   this.copy('Brocfile.js', 'Brocfile.js');
-  this.copy('_.eslintrc', '.eslintrc');
+  this.copy('_.eslintrc.js', '.eslintrc.js');
   this.copy('_.gitignore', '.gitignore');
   this.copy('_.babelrc', '.babelrc');
   this.copy('_.gitignore-public', 'public/.gitignore');
@@ -60,30 +60,7 @@ ProjectGenerator.prototype.project = function project() {
     To build your assets run "npm run assets:build"`);
   }, this);
 
-  var deps = [
-    'babel-preset-es2015',
-    'font-awesome',
-    'normalize-css',
-    'whatwg-fetch',
-    'yoga-sass',
-    'broccoli',
-    'broccoli-autoprefixer',
-    'broccoli-babel-transpiler@6.0.0-alpha.1',
-    'broccoli-csso',
-    'broccoli-cli',
-    'broccoli-browserify-cache',
-    'broccoli-funnel',
-    'broccoli-inject-livereload',
-    'broccoli-merge-trees',
-    'broccoli-sass-source-maps',
-    'broccoli-sourcemap-concat',
-    'broccoli-stew',
-    'ember-cli',
-    'eslint',
-    'eslint-config-rtablada',
-    'loader.js',
-    'sass-lint',
-  ];
+  var deps = require('./dependencies');
 
   this.npmInstall(deps, {
     saveDev: true,

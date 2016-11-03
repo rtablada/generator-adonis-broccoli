@@ -5,20 +5,33 @@ const Autoprefixer = require('broccoli-autoprefixer');
 const CssOptimizer = require('broccoli-csso');
 const Babel = require('broccoli-babel-transpiler');
 const rm = require('broccoli-stew').rm;
-const browserify = require('broccoli-browserify-cache');
+const browserify = require('broccoli-watchify');
+// const vueify = require('vueify');
 
 const stylePaths = [
   'resources/styles',
   'node_modules',
 ];
 
+// Edit this function to add browserify transforms,
+// external files, bundles, and more
+function browserifyInit(b) {
+  b.transform(envify);
+  // b.transform(vueify);
+}
+
 const appNoSass = rm('resources/javascript', '**/*.scss');
 
 const babelScript = new Babel(appNoSass);
 
 const appScript = browserify(babelScript, {
-  entries: ['./index'],
+  browserify: {
+    entries: ['./index'],
+    debug: true
+  },
   outputFile: 'app.js',
+
+  init: browserifyInit,
 });
 
 const compiledSass = new Sass(stylePaths, 'app.scss', 'app.css', {});
