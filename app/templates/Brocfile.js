@@ -6,6 +6,7 @@ const CssOptimizer = require('broccoli-csso');
 const Babel = require('broccoli-babel-transpiler');
 const rm = require('broccoli-stew').rm;
 const browserify = require('broccoli-watchify');
+const envify = require('envify');
 // const vueify = require('vueify');
 
 const stylePaths = [
@@ -29,6 +30,7 @@ const appScript = browserify(babelScript, {
     entries: ['./index'],
     debug: true
   },
+  cache: false,
   outputFile: 'app.js',
 
   init: browserifyInit,

@@ -1,4 +1,4 @@
-{
+module.exports = {
   "extends": "rtablada",
   "globals": {
     "use": "true"

@@ -20,5 +20,6 @@
     "envify@^3.4.1",
     "eslint@^2.4.0",
     "eslint-config-rtablada@^3.1.0",
-    "sass-lint@^1.9.1"
+    "sass-lint@^1.9.1",
+    "whatwg-fetch"
 ]
