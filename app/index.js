@@ -62,9 +62,7 @@ ProjectGenerator.prototype.project = function project() {
 
   var deps = require('./dependencies');
 
-  this.npmInstall(deps, {
-    saveDev: true,
-    skipMessage: true,
-    callback: done,
-  });
+  var yarn = this.spawnCommand('yarn', ['add'].concat(deps));
+
+  yarn.on('close', done);
 };

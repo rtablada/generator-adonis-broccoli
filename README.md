@@ -6,7 +6,7 @@ It also will also install [Yoga Sass](http://rtablada.github.io/yoga-sass), [Fon
 ## Installing the Generator
 
 ```bash
-npm install -g yo generator-adonis-broccoli ember-cli
+npm install -g yo generator-adonis-broccoli ember-cli yarn
 ```
 
 ## Creating Projects
