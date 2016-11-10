@@ -1,6 +1,6 @@
 {
   "name": "generator-adonis-broccoli",
-  "version": "3.0.2",
+  "version": "4.0.0",
   "description": "A Yeoman generator to add Broccoli builds to Adonis projects",
   "files": [
     "app",
