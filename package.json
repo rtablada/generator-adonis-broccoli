@@ -3,7 +3,8 @@
   "version": "3.0.2",
   "description": "A Yeoman generator to add Broccoli builds to Adonis projects",
   "files": [
-    "app"
+    "app",
+    "vue"
   ],
   "keywords": [
     "yeoman-generator"

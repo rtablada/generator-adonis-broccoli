@@ -4,7 +4,6 @@ var _ = require('lodash');
 var utils = require('keystone-utils');
 var yeoman = require('yeoman-generator');
 var wiring = require('html-wiring');
-var fs = require('fs');
 
 var ProjectGenerator = module.exports = function ProjectGenerator(args, options, config) {
 
@@ -15,12 +14,15 @@ var ProjectGenerator = module.exports = function ProjectGenerator(args, options,
   yeoman.generators.Base.apply(this, arguments);
 
   // Welcome
-  console.log('\nLet\'s add Broccoli to this Adonis project!\n');
+  console.log('\nLet\'s add Vue to this Adonis project!\n');
 
   // Import Package.json
   this.pkg = JSON.parse(wiring.readFileAsString(path.join(__dirname, '../package.json')));
 
 };
+
+// Extends the Base Generator
+util.inherits(ProjectGenerator, yeoman.generators.Base);
 
 ProjectGenerator.prototype.install = function install() {
   // This callback is fired when the generator has completed,
@@ -41,35 +43,16 @@ ProjectGenerator.prototype.install = function install() {
   yarn.on('close', done);
 }
 
-// Extends the Base Generator
-util.inherits(ProjectGenerator, yeoman.generators.Base);
-
 ProjectGenerator.prototype.project = function project() {
   var copyDir = [
-    'resources/styles',
     'resources/javascript',
-    'public/dist',
   ];
   var _this = this;
 
-  this.template('_.sass-lint.yml', '.sass-lint.yml');
   this.copy('Brocfile.js', 'Brocfile.js');
-  this.copy('_.eslintrc.js', '.eslintrc.js');
-  this.copy('_.gitignore', '.gitignore');
-  this.copy('_.babelrc', '.babelrc');
-  this.copy('_.gitignore-public', 'public/.gitignore');
-  this.copy('resources/views/master.njk', 'resources/views/master.njk');
+  this.copy('resources/views/vue.njk', 'resources/views/vue.njk');
 
   copyDir.forEach(function(file) {
     _this.bulkDirectory(file, file);
   });
-
-  // Updates package.json with asset scripts
-  var packagePath = process.cwd() + '/package.json';
-  var projectPakage = require(packagePath);
-
-  projectPakage.scripts['assets:build'] = 'ember build -o public/dist';
-  projectPakage.scripts['assets:watch'] = 'ember build -w -o public/dist';
-
-  fs.writeFileSync(packagePath, JSON.stringify(projectPakage, null, 2));
 };
